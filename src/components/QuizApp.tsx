@@ -12,10 +12,12 @@ import { Results } from "./Results";
 import { QUESTIONS } from "@/data/quiz";
 import {
   calcScores,
+  getBand,
   getFallbackResult,
   type Answer,
   type Scores,
 } from "@/lib/scoring";
+import { supabase } from "@/lib/supabase";
 import type { ResultData } from "@/data/quiz";
 
 type Stage = "intro" | "quiz" | "email" | "loading" | "results";
@@ -89,7 +91,7 @@ export function QuizApp() {
   }, [transition]);
 
   const handleEmailSubmit = useCallback(
-    (name: string, email: string) => {
+    async (name: string, email: string) => {
       setUserName(name);
       setUserEmail(email);
 
@@ -97,10 +99,22 @@ export function QuizApp() {
 
       const s = calcScores(answers);
       setScores(s);
-
-      // Use fallback results for now (Supabase/AI backend later)
       const result = getFallbackResult(s);
       setResultData(result);
+      const band = getBand(s.overall);
+
+      // Save to Supabase
+      try {
+        await supabase.from("quiz_leads").insert({
+          name: name.trim(),
+          email: email.trim(),
+          answers,
+          scores: s,
+          band_label: band.label,
+        });
+      } catch (err) {
+        console.error("Failed to save lead:", err);
+      }
 
       setTimeout(() => {
         transition(() => setStage("results"));
