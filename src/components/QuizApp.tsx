@@ -104,19 +104,20 @@ export function QuizApp() {
       const band = getBand(s.overall);
 
       // Save to Supabase
-      try {
-        const db = getSupabase();
-        if (db) {
-          await db.from("quiz_leads").insert({
-          name: name.trim(),
-          email: email.trim(),
-          answers,
-          scores: s,
-          band_label: band.label,
+      const db = getSupabase();
+      if (db) {
+        const { error } = await db
+          .from("quiz_leads")
+          .insert({
+            name: name.trim(),
+            email: email.trim(),
+            answers,
+            scores: s,
+            band_label: band.label,
           });
+        if (error) {
+          console.error("Failed to save lead:", error.message, error.details);
         }
-      } catch (err) {
-        console.error("Failed to save lead:", err);
       }
 
       setTimeout(() => {
