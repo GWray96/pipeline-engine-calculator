@@ -166,7 +166,9 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
             Pipeline Engine builds done-for-you lead generation systems for recruitment agency owners. 90-day guarantee. No long contracts.
           </p>
           <Link
-            href="/#cta"
+            href="https://calendar.app.google/3GdaJBEdTvXGrX1F8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block border-2 border-amber bg-amber px-9 py-4 font-['Barlow_Condensed'] text-[17px] font-extrabold uppercase tracking-[0.06em] text-ink no-underline transition-all hover:-translate-y-0.5 hover:bg-transparent hover:text-amber"
           >
             Book a Free Discovery Call →
