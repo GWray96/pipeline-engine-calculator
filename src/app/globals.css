@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0B0F14;
+  --color-ink-2: #141920;
+  --color-ink-3: #1C2430;
+  --color-amber: #E8A020;
+  --color-amber-light: #F5B840;
+  --color-amber-dim: rgba(232, 160, 32, 0.12);
+  --color-cream: #F7F4EE;
+  --color-grey: #8A95A0;
+  --color-grey-light: #B8C2CC;
+  --color-divider: rgba(255, 255, 255, 0.07);
+  --color-red: #E84040;
+  --color-band-critical: #E84040;
+  --color-band-risk: #E87830;
+  --color-band-building: #E8A020;
+  --color-band-systemised: #40C880;
+  --font-head: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-dot-pulse {
+  animation: dotPulse 1.4s infinite ease-in-out both;
+}
