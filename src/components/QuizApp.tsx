@@ -17,7 +17,7 @@ import {
   type Answer,
   type Scores,
 } from "@/lib/scoring";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import type { ResultData } from "@/data/quiz";
 
 type Stage = "intro" | "quiz" | "email" | "loading" | "results";
@@ -105,13 +105,16 @@ export function QuizApp() {
 
       // Save to Supabase
       try {
-        await supabase.from("quiz_leads").insert({
+        const db = getSupabase();
+        if (db) {
+          await db.from("quiz_leads").insert({
           name: name.trim(),
           email: email.trim(),
           answers,
           scores: s,
           band_label: band.label,
-        });
+          });
+        }
       } catch (err) {
         console.error("Failed to save lead:", err);
       }
