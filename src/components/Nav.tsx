@@ -10,7 +10,7 @@ export function Nav() {
         Pipeline<span className="text-amber">Engine</span>
       </Link>
       <Link
-        href="https://pipeline-engine-lanndingpage.vercel.app/"
+        href="https://thepipelineengine.com/"
         className="font-head text-sm font-semibold uppercase tracking-[0.06em] text-grey no-underline transition-colors hover:text-amber"
       >
         ← Back to site
