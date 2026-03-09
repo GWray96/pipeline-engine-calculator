@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1A1A1A;
-  --color-ink-2: #262626;
-  --color-ink-3: #333333;
+  --color-ink: rgb(11, 15, 20);
+  --color-ink-2: rgb(18, 24, 32);
+  --color-ink-3: rgb(28, 36, 48);
   --color-amber: #FF9900;
   --color-amber-light: #FFB340;
   --color-amber-dim: rgba(255, 153, 0, 0.12);
