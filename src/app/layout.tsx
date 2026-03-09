@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-oswald",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Pipeline Dependency Score — Pipeline Engine",
@@ -13,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html lang="en" className={`${oswald.variable} ${inter.variable}`}>
+      <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   );
 }

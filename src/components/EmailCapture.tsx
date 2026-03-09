@@ -30,10 +30,10 @@ export function EmailCapture({ onSubmit }: EmailCaptureProps) {
   return (
     <div className="relative z-10 flex min-h-[calc(100vh-72px)] flex-col items-center justify-center px-6 py-12 pb-20">
       <div className="relative z-10 w-full max-w-[540px] animate-[fadeUp_0.5s_ease_both] text-center">
-        <span className="mb-4 block font-['Oswald'] text-xs font-bold uppercase tracking-[0.18em] text-amber">
+        <span className="mb-4 block font-head text-xs font-bold uppercase tracking-[0.18em] text-amber">
           Your Score Is Ready
         </span>
-        <h2 className="mb-5 font-['Oswald'] text-[clamp(44px,6vw,68px)] font-black leading-[0.96] uppercase">
+        <h2 className="mb-5 font-head text-[clamp(44px,6vw,68px)] font-black leading-[0.96] uppercase">
           One last
           <br />
           thing.
@@ -42,7 +42,7 @@ export function EmailCapture({ onSubmit }: EmailCaptureProps) {
           Enter your details to unlock your full Pipeline Dependency breakdown — score across all 4 categories and 3 things to fix first.
         </p>
         <div className="mb-7 border border-divider border-l-[3px] border-l-amber bg-ink-2 p-6 text-left">
-          <span className="mb-2.5 block font-['Oswald'] text-[11px] font-bold uppercase tracking-[0.14em] text-amber">
+          <span className="mb-2.5 block font-head text-[11px] font-bold uppercase tracking-[0.14em] text-amber">
             Score preview
           </span>
           {CATS.map((cat, i) => (
@@ -59,7 +59,7 @@ export function EmailCapture({ onSubmit }: EmailCaptureProps) {
         </div>
 
         <div className="mb-3 text-left">
-          <label htmlFor="nameInput" className="mb-1.5 block font-['Oswald'] text-xs font-bold uppercase tracking-[0.12em] text-grey">
+          <label htmlFor="nameInput" className="mb-1.5 block font-head text-xs font-bold uppercase tracking-[0.12em] text-grey">
             Full Name
           </label>
           <input
@@ -78,7 +78,7 @@ export function EmailCapture({ onSubmit }: EmailCaptureProps) {
         </div>
 
         <div className="mb-4 text-left">
-          <label htmlFor="emailInput" className="mb-1.5 block font-['Oswald'] text-xs font-bold uppercase tracking-[0.12em] text-grey">
+          <label htmlFor="emailInput" className="mb-1.5 block font-head text-xs font-bold uppercase tracking-[0.12em] text-grey">
             Email Address
           </label>
           <input
@@ -99,7 +99,7 @@ export function EmailCapture({ onSubmit }: EmailCaptureProps) {
         <button
           type="button"
           onClick={handleSubmit}
-          className="w-full border-2 border-amber bg-amber px-9 py-4 font-['Oswald'] text-[17px] font-extrabold uppercase tracking-[0.06em] text-ink transition-all hover:-translate-y-0.5 hover:bg-transparent hover:text-amber"
+          className="w-full border-2 border-amber bg-amber px-9 py-4 font-head text-[17px] font-extrabold uppercase tracking-[0.06em] text-ink transition-all hover:-translate-y-0.5 hover:bg-transparent hover:text-amber"
         >
           Show Me My Score →
         </button>

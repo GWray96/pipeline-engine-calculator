@@ -60,7 +60,7 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
     <div className="relative z-10 flex min-h-[calc(100vh-72px)] flex-col items-center justify-start px-6 pb-24 pt-20">
       <div className="relative z-10 w-full max-w-[720px] animate-[fadeUp_0.5s_ease_both]">
         <div className="mb-12 text-center" data-user-email={userEmail}>
-          <span className="mb-4 block font-['Oswald'] text-xs font-bold uppercase tracking-[0.18em] text-amber">
+          <span className="mb-4 block font-head text-xs font-bold uppercase tracking-[0.18em] text-amber">
             {userName ? `${userName}'s ` : ""}Pipeline Dependency Score
           </span>
           <div className="my-6 flex flex-col items-center gap-5">
@@ -78,15 +78,15 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
                 }}
               />
               <span
-                className="font-['Oswald'] text-[76px] font-black leading-none tracking-[-0.02em]"
+                className="font-head text-[76px] font-black leading-none tracking-[-0.02em]"
                 style={{ color: band.color }}
               >
                 <AnimatedScore target={scores.overall} />
               </span>
-              <span className="font-['Oswald'] text-base font-bold text-grey">/ 100</span>
+              <span className="font-head text-base font-bold text-grey">/ 100</span>
             </div>
             <div
-              className="inline-flex items-center gap-2 rounded border-2 px-5 py-2 font-['Oswald'] text-base font-extrabold uppercase tracking-[0.12em]"
+              className="inline-flex items-center gap-2 rounded border-2 px-5 py-2 font-head text-base font-extrabold uppercase tracking-[0.12em]"
               style={{
                 borderColor: band.color,
                 color: band.color,
@@ -101,7 +101,7 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
         </div>
 
         <div className="my-11 h-px bg-divider" />
-        <p className="mb-6 font-['Oswald'] text-[13px] font-bold uppercase tracking-[0.18em] text-amber">
+        <p className="mb-6 font-head text-[13px] font-bold uppercase tracking-[0.18em] text-amber">
           Category Breakdown
         </p>
         <div className="mb-11 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
@@ -111,10 +111,10 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
             return (
               <div key={name} className="border border-divider bg-ink-2 p-5">
                 <div className="mb-2.5 flex items-baseline justify-between">
-                  <span className="font-['Oswald'] text-lg font-extrabold uppercase tracking-[0.05em]" style={{ color }}>
+                  <span className="font-head text-lg font-extrabold uppercase tracking-[0.05em]" style={{ color }}>
                     {name}
                   </span>
-                  <span className="font-['Oswald'] text-[28px] font-black leading-none" style={{ color }}>
+                  <span className="font-head text-[28px] font-black leading-none" style={{ color }}>
                     {score}
                     <span className="text-sm font-semibold text-grey">/100</span>
                   </span>
@@ -129,7 +129,7 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
         </div>
 
         <div className="my-11 h-px bg-divider" />
-        <p className="mb-6 font-['Oswald'] text-[13px] font-bold uppercase tracking-[0.18em] text-amber">
+        <p className="mb-6 font-head text-[13px] font-bold uppercase tracking-[0.18em] text-amber">
           3 Things to Fix First
         </p>
         <p className="mb-6 text-base text-grey-light">Based on your specific breakdown — in priority order.</p>
@@ -141,11 +141,11 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
             >
               <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-amber" />
               <div className="flex gap-4">
-                <span className="font-['Oswald'] text-[32px] font-black leading-none text-amber">
+                <span className="font-head text-[32px] font-black leading-none text-amber">
                   0{i + 1}
                 </span>
                 <div>
-                  <h4 className="mb-1.5 font-['Oswald'] text-xl font-extrabold uppercase tracking-[0.04em] text-cream">
+                  <h4 className="mb-1.5 font-head text-xl font-extrabold uppercase tracking-[0.04em] text-cream">
                     {fix.title}
                   </h4>
                   <p className="text-[15px] leading-[1.6] text-grey-light">{fix.description}</p>
@@ -157,7 +157,7 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
 
         <div className="relative mt-12 overflow-hidden border border-divider bg-ink-2 p-10 text-center">
           <div className="absolute left-0 right-0 top-0 h-0.5 bg-amber" />
-          <h3 className="mb-3.5 font-['Oswald'] text-[clamp(30px,4vw,46px)] font-black uppercase">
+          <h3 className="mb-3.5 font-head text-[clamp(30px,4vw,46px)] font-black uppercase">
             Ready to Build
             <br />
             the System?
@@ -169,7 +169,7 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
             href="https://calendar.app.google/3GdaJBEdTvXGrX1F8"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block border-2 border-amber bg-amber px-9 py-4 font-['Oswald'] text-[17px] font-extrabold uppercase tracking-[0.06em] text-ink no-underline transition-all hover:-translate-y-0.5 hover:bg-transparent hover:text-amber"
+            className="inline-block border-2 border-amber bg-amber px-9 py-4 font-head text-[17px] font-extrabold uppercase tracking-[0.06em] text-ink no-underline transition-all hover:-translate-y-0.5 hover:bg-transparent hover:text-amber"
           >
             Book a Free Discovery Call →
           </Link>
@@ -180,7 +180,7 @@ export function Results({ scores, data, userName, userEmail, onRetake }: Results
           <button
             type="button"
             onClick={onRetake}
-            className="border-none bg-transparent font-['Oswald'] text-sm font-semibold uppercase tracking-widest text-grey underline underline-offset-1 transition-colors hover:text-cream"
+            className="border-none bg-transparent font-head text-sm font-semibold uppercase tracking-widest text-grey underline underline-offset-1 transition-colors hover:text-cream"
           >
             ↺ Retake the Assessment
           </button>
