@@ -16,8 +16,8 @@
   --color-band-risk: #E87830;
   --color-band-building: #E8A020;
   --color-band-systemised: #40C880;
-  --font-head: var(--font-oswald), sans-serif;
-  --font-body: var(--font-inter), sans-serif;
+  --font-head: var(--font-barlow-condensed), sans-serif;
+  --font-body: var(--font-barlow), sans-serif;
 }
 
 html {
@@ -61,5 +61,5 @@ body {
 }
 
 .font-head {
-  font-family: var(--font-oswald), sans-serif;
+  font-family: var(--font-barlow-condensed), "Barlow Condensed", sans-serif;
 }

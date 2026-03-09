@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 
-const oswald = Oswald({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-oswald",
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-barlow-condensed",
 });
 
-const inter = Inter({
+const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  variable: "--font-barlow",
 });
 
 export const metadata: Metadata = {
@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${oswald.variable} ${inter.variable}`}>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" className={`${barlowCondensed.variable} ${barlow.variable}`}>
+      <body className={`${barlow.className} antialiased`}>{children}</body>
     </html>
   );
 }
