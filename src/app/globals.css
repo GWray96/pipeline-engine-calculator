@@ -1,24 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0B0F14;
-  --color-ink-2: #141920;
-  --color-ink-3: #1C2430;
-  --color-amber: #E8A020;
-  --color-amber-light: #F5B840;
-  --color-amber-dim: rgba(232, 160, 32, 0.12);
-  --color-cream: #F7F4EE;
+  --color-ink: #1A1A1A;
+  --color-ink-2: #262626;
+  --color-ink-3: #333333;
+  --color-amber: #FF9900;
+  --color-amber-light: #FFB340;
+  --color-amber-dim: rgba(255, 153, 0, 0.12);
+  --color-cream: #E0E0E0;
   --color-grey: #8A95A0;
   --color-grey-light: #B8C2CC;
-  --color-divider: rgba(255, 255, 255, 0.07);
+  --color-divider: rgba(255, 255, 255, 0.08);
   --color-red: #E84040;
   --color-band-critical: #E84040;
   --color-band-risk: #E87830;
   --color-band-building: #E8A020;
   --color-band-systemised: #40C880;
-  --font-head: 'Barlow Condensed', sans-serif;
-  --font-body: 'Barlow', sans-serif;
+  --font-head: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 html {

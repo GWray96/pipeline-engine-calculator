@@ -23,14 +23,14 @@ export function Quiz({ question, questionIndex, totalQuestions, answers, onSelec
     <div className="relative z-10 flex min-h-[calc(100vh-72px)] flex-col items-center justify-start px-6 pb-20 pt-20">
       <div className="relative z-10 w-full max-w-[680px] animate-[fadeUp_0.4s_ease_both]">
         <div className="mb-6 flex items-center justify-between">
-          <span className="border border-amber-500/20 bg-amber-dim px-3 py-1 font-['Barlow_Condensed'] text-xs font-bold uppercase tracking-[0.16em] text-amber">
+          <span className="border border-amber-500/20 bg-amber-dim px-3 py-1 font-['Oswald'] text-xs font-bold uppercase tracking-[0.16em] text-amber">
             {question.category}
           </span>
-          <span className="font-['Barlow_Condensed'] text-sm font-bold tracking-widest text-grey">
+          <span className="font-['Oswald'] text-sm font-bold tracking-widest text-grey">
             {pad(questionIndex + 1)} / {totalQuestions}
           </span>
         </div>
-        <h2 className="mb-7 font-['Barlow_Condensed'] text-[clamp(26px,4vw,40px)] font-extrabold leading-[1.1] tracking-[-0.005em] uppercase text-cream">
+        <h2 className="mb-7 font-['Oswald'] text-[clamp(26px,4vw,40px)] font-extrabold leading-[1.1] tracking-[-0.005em] uppercase text-cream">
           {question.text}
         </h2>
         <div className="flex flex-col gap-2.5">
@@ -48,7 +48,7 @@ export function Quiz({ question, questionIndex, totalQuestions, answers, onSelec
                 }`}
               >
                 <span
-                  className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center border font-['Barlow_Condensed'] text-sm font-extrabold transition-colors ${
+                  className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center border font-['Oswald'] text-sm font-extrabold transition-colors ${
                     isSelected
                       ? "border-amber bg-amber text-ink"
                       : "border-amber-500/40 text-amber"
@@ -67,7 +67,7 @@ export function Quiz({ question, questionIndex, totalQuestions, answers, onSelec
           <button
             type="button"
             onClick={onBack}
-            className="mt-6 border-none bg-transparent p-0 font-['Barlow_Condensed'] text-sm font-semibold uppercase tracking-[0.08em] text-grey transition-colors hover:text-cream"
+            className="mt-6 border-none bg-transparent p-0 font-['Oswald'] text-sm font-semibold uppercase tracking-[0.08em] text-grey transition-colors hover:text-cream"
           >
             ← Previous question
           </button>

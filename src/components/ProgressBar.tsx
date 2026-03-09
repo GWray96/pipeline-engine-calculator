@@ -14,7 +14,7 @@ export function ProgressBar({ percent }: ProgressBarProps) {
       aria-valuemax={100}
     >
       <div
-        className="h-full bg-amber shadow-[0_0_12px_rgba(232,160,32,0.4)] transition-[width] duration-500 ease-in-out"
+        className="h-full bg-amber shadow-[0_0_12px_rgba(255,153,0,0.4)] transition-[width] duration-500 ease-in-out"
         style={{ width: `${percent}%` }}
       />
     </div>
