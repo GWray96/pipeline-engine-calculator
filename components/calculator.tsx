@@ -17,7 +17,10 @@ import {
   ChevronDown,
   RotateCcw,
   Zap,
+  Mail,
+  Loader2,
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -28,7 +31,7 @@ interface FormData {
   currentConversations: number;
 }
 
-type Screen = "intro" | "step" | "calculating" | "results";
+type Screen = "intro" | "step" | "calculating" | "email" | "results";
 
 // ─── Calculation engine ───────────────────────────────────────────────────────
 
@@ -610,14 +613,22 @@ function Results({
 
 // ─── Calculating screen ───────────────────────────────────────────────────────
 
+const CALC_STAGES = [
+  "Reading your revenue target…",
+  "Factoring in your deal value…",
+  "Applying your close rate…",
+  "Comparing against your current pipeline…",
+  "Calculating your gap…",
+];
+
 function Calculating({ data }: { data: FormData }) {
-  const dots = [".", "..", "..."];
-  const [dotIdx, setDotIdx] = useState(0);
+  const [stageIdx, setStageIdx] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => setDotIdx((i) => (i + 1) % 3), 500);
-    return () => clearInterval(interval);
-  }, []);
+    if (stageIdx >= CALC_STAGES.length - 1) return;
+    const t = setTimeout(() => setStageIdx((s) => s + 1), 580);
+    return () => clearTimeout(t);
+  }, [stageIdx]);
 
   return (
     <motion.div
@@ -628,15 +639,21 @@ function Calculating({ data }: { data: FormData }) {
       className="p-10 rounded-2xl border border-border bg-bg-card text-center"
     >
       <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6">
-        <Zap size={24} className="text-accent" />
+        <Zap size={24} className="text-accent animate-pulse" />
       </div>
-      <p className="text-lg font-semibold text-text-primary mb-2">
-        Calculating your pipeline gap{dots[dotIdx]}
-      </p>
-      <p className="text-sm text-text-muted mb-8">
-        Crunching your numbers
-      </p>
-      <div className="flex flex-wrap justify-center gap-2">
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={stageIdx}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25 }}
+          className="text-base font-semibold text-text-primary mb-2"
+        >
+          {CALC_STAGES[stageIdx]}
+        </motion.p>
+      </AnimatePresence>
+      <div className="flex flex-wrap justify-center gap-2 mt-6">
         {[
           { label: "Target", value: formatCurrency(data.revenueTarget) },
           { label: "Deal value", value: formatCurrency(data.avgDealValue) },
@@ -654,6 +671,111 @@ function Calculating({ data }: { data: FormData }) {
             <span className="text-accent font-medium">{item.value}</span>
           </motion.span>
         ))}
+      </div>
+      <div className="flex justify-center gap-1.5 mt-6">
+        {CALC_STAGES.map((_, i) => (
+          <motion.div
+            key={i}
+            className="h-1 rounded-full bg-accent"
+            animate={{ width: i <= stageIdx ? 20 : 6, opacity: i <= stageIdx ? 1 : 0.25 }}
+            transition={{ duration: 0.3 }}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Email capture screen ────────────────────────────────────────────────────
+
+function EmailCapture({
+  data,
+  onSubmit,
+}: {
+  data: FormData;
+  onSubmit: (email: string) => void;
+}) {
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const { gap, revenueGap, conversationsNeeded } = calculate(data);
+  const cta = getCtaConfig(gap, revenueGap);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubmitting(true);
+
+    const { error: dbError } = await supabase.from("calculator_submissions").insert({
+      email: email.trim().toLowerCase(),
+      revenue_target: data.revenueTarget,
+      avg_deal_value: data.avgDealValue,
+      close_rate: data.closeRate,
+      current_conversations: data.currentConversations,
+      conversations_needed: conversationsNeeded,
+      gap,
+      revenue_gap: revenueGap,
+    });
+
+    if (dbError) console.error("Supabase error:", dbError);
+
+    setSubmitting(false);
+    onSubmit(email);
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4 }}
+      className="space-y-4"
+    >
+      {/* Result teaser */}
+      <div className="text-center p-8 rounded-2xl border border-border bg-bg-card relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-accent/6 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative">
+          <p className="text-xs text-accent uppercase tracking-widest mb-4">Your pipeline gap</p>
+          <div className="flex items-end justify-center gap-3 mb-2">
+            <span className="text-6xl md:text-7xl font-bold text-text-primary leading-none blur-md select-none">
+              {conversationsNeeded}
+            </span>
+            <span className="text-text-muted text-lg mb-2 blur-md select-none">/ month</span>
+          </div>
+          <p className="text-sm text-text-muted mt-3">Enter your email to unlock your full breakdown</p>
+        </div>
+      </div>
+
+      {/* Email form */}
+      <div className="p-6 rounded-xl border border-border bg-bg-card">
+        <div className="flex items-center gap-2 mb-4">
+          <Mail size={15} className="text-accent" />
+          <p className="text-sm font-medium text-text-primary">Where should we send your results?</p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@company.com"
+            required
+            autoFocus
+            className="w-full px-4 py-3 rounded-lg border border-border bg-bg-elevated text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent transition-colors"
+          />
+          <button
+            type="submit"
+            disabled={submitting || !email.trim()}
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-accent hover:bg-accent-dim text-white font-medium text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+          >
+            {submitting ? (
+              <><Loader2 size={15} className="animate-spin" /> Saving your results…</>
+            ) : (
+              <>View my results <ArrowRight size={15} /></>
+            )}
+          </button>
+        </form>
+        <p className="text-xs text-text-muted text-center mt-3">
+          We&apos;ll also send a copy to your inbox. No spam, ever.
+        </p>
       </div>
     </motion.div>
   );
@@ -864,7 +986,7 @@ export default function Calculator() {
       setStep((s) => s + 1);
     } else {
       setScreen("calculating");
-      setTimeout(() => setScreen("results"), 1800);
+      setTimeout(() => setScreen("email"), 3200);
     }
   }, [step]);
 
@@ -1000,6 +1122,15 @@ export default function Calculator() {
             {screen === "calculating" && (
               <motion.div key="calculating">
                 <Calculating data={data} />
+              </motion.div>
+            )}
+
+            {screen === "email" && (
+              <motion.div key="email">
+                <EmailCapture
+                  data={data}
+                  onSubmit={() => setScreen("results")}
+                />
               </motion.div>
             )}
 
