@@ -20,7 +20,6 @@ import {
   Mail,
   Loader2,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -705,18 +704,25 @@ function EmailCapture({
     if (!email.trim()) return;
     setSubmitting(true);
 
-    const { error: dbError } = await supabase.from("calculator_submissions").insert({
-      email: email.trim().toLowerCase(),
-      revenue_target: data.revenueTarget,
-      avg_deal_value: data.avgDealValue,
-      close_rate: data.closeRate,
-      current_conversations: data.currentConversations,
-      conversations_needed: conversationsNeeded,
-      gap,
-      revenue_gap: revenueGap,
-    });
-
-    if (dbError) console.error("Supabase error:", dbError);
+    try {
+      await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          revenue_target: data.revenueTarget,
+          avg_deal_value: data.avgDealValue,
+          close_rate: data.closeRate,
+          current_conversations: data.currentConversations,
+          conversations_needed: conversationsNeeded,
+          gap,
+          revenue_gap: revenueGap,
+        }),
+      });
+    } catch (err) {
+      console.error("Submit error:", err);
+      // Don't block user on error
+    }
 
     setSubmitting(false);
     onSubmit(email);
