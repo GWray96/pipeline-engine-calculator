@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-bg-base: #070B18;
+  --color-bg-card: #0C1226;
+  --color-bg-elevated: #131B35;
+  --color-border: #1B2B50;
+  --color-text-primary: #E8EEFF;
+  --color-text-muted: #8896BB;
+  --color-accent: #4F7EFF;
+  --color-accent-dim: #3360CC;
+  --color-green: #34D399;
+  --color-amber: #F59E0B;
+  --color-red: #F87171;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #070B18;
+  --foreground: #E8EEFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #4F7EFF33;
+  color: #E8EEFF;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #070B18; }
+::-webkit-scrollbar-thumb { background: #1B2B50; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4F7EFF; }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: #1B2B50;
+  border-radius: 9999px;
+  height: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #4F7EFF;
+  border-radius: 9999px;
+  height: 20px;
+  width: 20px;
+  box-shadow: 0 0 0 4px rgba(79,126,255,0.2);
+  transition: box-shadow 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 7px rgba(79,126,255,0.25);
+}
+
+input[type="range"]::-moz-range-track {
+  background: #1B2B50;
+  border-radius: 9999px;
+  height: 4px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #4F7EFF;
+  border: none;
+  border-radius: 9999px;
+  height: 20px;
+  width: 20px;
 }
