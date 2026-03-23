@@ -195,7 +195,7 @@ export async function POST(req: NextRequest) {
 </html>`;
 
   try {
-    await Promise.all([
+    const results = await Promise.all([
       resend.emails.send({
         from: "Pipeline Engine <hello@thepipelineengine.com>",
         to: email,
@@ -209,6 +209,7 @@ export async function POST(req: NextRequest) {
         html: notifyHtml,
       }),
     ]);
+    console.log("Resend results:", JSON.stringify(results, null, 2));
   } catch (err) {
     console.error("Resend error:", err);
   }
